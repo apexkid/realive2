@@ -4,7 +4,7 @@ from . import api_blueprint as app
 from flask.ext.classy import FlaskView, route
 from bidding import models as km
 import json
-from flask import Response, request
+from flask import Response, request, session
 from bson import json_util
 from datetime import datetime
 
@@ -66,6 +66,7 @@ class Campaign(FlaskView):
         if 'priorities' in keys:
             campaign.priorities = data['priorities']
         campaign.added_on = datetime.now()
+        campaign.user = km.User.objects.get(user_id=session['user_id'])
         try:
             campaign.save()
             return Response(json.dumps(campaign.to_json(), default=json_util.default), status=200, content_type="application/json")

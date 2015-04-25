@@ -17,8 +17,25 @@ class User(db.Document):
         self.modified_on = datetime.now()
         super(User, self).save(*args, **kwargs)
 
+    def to_json(self):
+        return {
+            'id': self.id,
+            'user_id': self.name,
+            'is_active': self.is_active,
+            'is_deleted': self.is_deleted,
+            'added_on': self.added_on,
+            'modified_on': self.modified_on
+        }
+
+    def __repr__(self):
+        return self.id
+
+    def __str__(self):
+        return str(self.id)
+
 
 class Campaign(db.Document):
+    user = db.ReferenceField(User)
     city = db.StringField(max_length=30)
     officeLocation = db.StringField(max_length=100)
     localityPref = db.StringField(max_length=100)
@@ -36,6 +53,7 @@ class Campaign(db.Document):
 
     def to_json(self):
         return {
+            'user': self.user.id,
             'id': self.id,
             'city': self.city,
             'officeLocation': self.officeLocation,
@@ -49,3 +67,46 @@ class Campaign(db.Document):
             'modified_on': self.modified_on
 
         }
+
+    def __repr__(self):
+        return self.id
+
+    def __str__(self):
+        return str(self.id)
+
+
+class Comment(db.Document):
+    campaign_id = db.ReferenceField(Campaign)
+    user = db.ReferenceField(User)
+    content = db.StringField(max_length=500)
+    longitude = db.StringField(max_length=20)
+    latitude = db.StringField(max_length=20)
+    is_active = db.BooleanField(default=True)
+    is_deleted = db.BooleanField(default=False)
+    added_on = db.DateTimeField()
+    modified_on = db.DateTimeField()
+
+    def save(self, *args, **kwargs):
+        self.modified_on = datetime.now()
+        super(Comment, self).save(*args, **kwargs)
+
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'user': self.user.id,
+            'campaign': self.campaign_id.id,
+            'content': self.content,
+            'longitude': self.longitude,
+            'latitude': self.latitude,
+            'is_active': self.is_active,
+            'is_deleted': self.is_deleted,
+            'added_on': self.added_on,
+            'modified_on': self.modified_on
+        }
+
+    def __repr__(self):
+        return self.id
+
+    def __str__(self):
+        return str(self.id)

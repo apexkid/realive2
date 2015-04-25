@@ -20,5 +20,10 @@ class CampaignAdmin(ModelView):
     column_searchable_list = ('city', 'officeLocation')
     can_delete = False
 
-
 admin.add_view(CampaignAdmin(Campaign))
+
+class CommentAdmin(ModelView):
+    list_template = 'list.html'
+    can_delete = False
+
+admin.add_view(CommentAdmin(Comment))
