@@ -55,5 +55,16 @@ class Campaign(FlaskView):
         except Exception,e :
             return Response(json.dumps({'details':'Exception: %s'%repr(e)}), status=403, content_type="application/json")
 
+    def delete(self, c_id):
+        try:
+            campaign = km.Campaign.objects.get(id=c_id)
+            campaign.is_active = False
+            campaign.is_deleted = True
+            campaign.save()
+            return Response(json.dumps(campaign.to_json(), default=json_util.default), status=200, content_type="application/json")
+        except Exception,e:
+            return Response(json.dumps({'details':'Exception: %s'%repr(e)}), status=403, content_type="application/json")
+
+
 
 Campaign.register(app)
