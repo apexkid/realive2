@@ -23,7 +23,7 @@ var root = 'http://localhost:5000';
 		});
 	};
 
-	function addCampaign(ntitle, ncity, nofficeLocation, nlocalityPref, npoi, nlivingCost, npriorities, nmove_in_date, nend_date) {
+	function addCampaign(ntitle, ncity, nofficeLocation, nlocalityPref, npoi, nlivingCost, npriorities, nmove_in_date, nend_date, ndescription) {
 		$.ajax({
 			url: root + '/campaign/',
   			method: 'POST',
@@ -36,7 +36,8 @@ var root = 'http://localhost:5000';
 			    livingCost: nlivingCost,
 			    priorities: npriorities,
 			    move_in_date: nmove_in_date,
-			    end_date: nend_date
+			    end_date: nend_date,
+			    description: ndescription
 			},
 			success: function(data) {
   				console.log(data);

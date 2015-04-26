@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en"><head>
+<html xmlns:fb="http://www.facebook.com/2008/fbml"><head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,8 +20,37 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        
-        
+        <script src="js/jquery.js"></script>
+        <script src="our_ajax.js"></script>
+        <script>
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+            id = getParameterByName('id');
+            campaign = getOneCampaign(id);
+            console.log(campaign);
+        </script>
+
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+
+
+<script>
+	FB.init({appId: '1433546090279923', xfbml: true, cookie: true});
+	function FacebookInviteFriends()
+	{
+		FB.ui({
+          	method: 'send',
+          	name: 'People Argue Just to Win',
+          	link: 'http://localhost:5000/static/campaign?id=553c6ddf7e62737e1b269ca4',
+          	to: 841888432568719,
+          	description: 'Job Campaign'
+          });
+	}
+</script>
+<
     </head> 
     <body>
         <!-- Navigation -->
@@ -64,8 +93,8 @@
                         <h3>Need a fun &amp; silent place</h3>
                         <h4 class="white"> 26th June, 2014</h4>
                         <h4 class="white"><i class="fa fa-clock-o"></i> 12 days remaining</h4>
-                        <button type="button" class="btn btn-labeled btn-info" href="#">
-                            <span class="btn-label"><i class="fa fa-pencil"></i></span>Suggest Places to Live</button>
+                        <a href='#' onclick="FacebookInviteFriends();"> Facebook Invite Friends Link </a>
+
                     </div>
                 </div>
                 <div class="col-md-6 no-pad">

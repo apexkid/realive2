@@ -37,6 +37,7 @@ class User(db.Document):
 class Campaign(db.Document):
     user = db.ReferenceField(User)
     city = db.StringField(max_length=30)
+    desciption = db.StringField(max_length=1000)
     officeLocation = db.StringField(max_length=100)
     localityPref = db.StringField(max_length=100)
     poi = db.StringField(max_length=100)

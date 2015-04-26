@@ -26,8 +26,23 @@
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
+    <![endif]-->
+    <script src="our_ajax.js"></script>
+        <script>
+            function getParams(){
+                addCampaign($("#title").val(),
+                    $("#city").val(),
+                    $("#officeLocation").val(),
+                    $("#localityPref").val(),
+                    $("#poi").val(),
+                    $("#livingCost").val(),
+                    $("#priorities").val(),
+                    $("#move_in").val(),
+                    $("#end_on").val(),
+                    $("#description").val())
+	            };
+        </script>
 </head>
 
 <body>
@@ -85,24 +100,24 @@
         </div>
     </div>
 </div>
-<form role="form">
+<form role="form" onsubmit="getParams();" name="wizard">
     <div class="row setup-content" id="step-1">
         <div class="col-xs-12">
             <div class="col-md-12">
                 <h3> Step 1</h3>
                 <div class="form-group">
                     <label class="control-label">Campaign Title</label>
-                    <input  maxlength="100" type="text" required="required" class="form-control" placeholder="Title"  />
+                    <input  id="title" maxlength="100" type="text" required="required" class="form-control" placeholder="Title"  />
                 </div>
                 <div class="form-group">
                     <label class="control-label">Campaign ends on</label>
-                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Ends On" />
+                    <input id="end_on" maxlength="100" type="text" required="required" class="form-control" placeholder="Ends On" />
                 </div>
                 <div class="form-group">
                     <label class="control-label">City, Budget & Move-in Date</label>
-                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="City" />
-                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Budget" />
-                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Move-in date" />
+                    <input id="city" maxlength="100" type="text" required="required" class="form-control" placeholder="City" />
+                    <input id="budget" maxlength="100" type="text" required="required" class="form-control" placeholder="Budget" />
+                    <input id="move_in" maxlength="100" type="text" required="required" class="form-control" placeholder="Move-in date" />
                 </div>
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
             </div>
@@ -114,15 +129,15 @@
                 <h3> Step 2</h3>
                 <div class="form-group">
                     <label class="control-label">Locality Preferences </label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Locality Preference " />
+                    <input id="localityPref" maxlength="200" type="text" required="required" class="form-control" placeholder="Locality Preference " />
                 </div>
                 <div class="form-group">
                     <label class="control-label">Hobbies</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Hobbies"  />
+                    <input id="poi" maxlength="200" type="text" required="required" class="form-control" placeholder="Hobbies"  />
                 </div>
                 <div class="form-group">
                     <label class="control-label">Priorities</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Priorities"  />
+                    <input id="priorities" maxlength="200" type="text" required="required" class="form-control" placeholder="Priorities"  />
                 </div>
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
             </div>
@@ -135,7 +150,7 @@
 
                 <div class="form-group">
                     <label class="control-label">Campaign Message</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Campaign Message"  />
+                    <input id="description" maxlength="200" type="text" required="required" class="form-control" placeholder="Campaign Message"  />
                 </div>
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
             </div>
@@ -225,6 +240,7 @@
     });
 
     $('div.setup-panel div a.btn-primary').trigger('click');
+
 });</script>
 
 </body>

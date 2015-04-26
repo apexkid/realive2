@@ -71,6 +71,9 @@ class Campaign(FlaskView):
             campaign.move_in_date = data['move_in_date']
         if 'end_date' in keys:
             campaign.end_date = data['end_date']
+        if 'description' in keys:
+            campaign.description = data['description']
+
         campaign.added_on = datetime.now()
         campaign.user = km.User.objects.get(user_id=session['user_id'])
         print json.dumps(campaign.to_json(), default=json_util.default)
