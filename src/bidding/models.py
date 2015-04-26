@@ -46,6 +46,8 @@ class Campaign(db.Document):
     is_deleted = db.BooleanField(default=False)
     added_on = db.DateTimeField()
     modified_on = db.DateTimeField()
+    move_in_date = db.StringField(max_length=20)
+    end_date = db.StringField(max_length=20)
 
     def save(self, *args, **kwargs):
         self.modified_on = datetime.now()
@@ -64,7 +66,9 @@ class Campaign(db.Document):
             'is_active': self.is_active,
             'is_deleted': self.is_deleted,
             'added_one': self.added_on,
-            'modified_on': self.modified_on
+            'modified_on': self.modified_on,
+            'move_in_date': self.move_in_date,
+            'end_date': self.end_date
 
         }
 

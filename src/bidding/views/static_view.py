@@ -8,6 +8,10 @@ def index():
     return render_template('mockup/index.html')
 
 
-@app.route('/static/campaign')
+@app.route('/static/campaigns')
 def campaign():
     return render_template('mockup/campaigns.html')
+
+@app.route('/static/campaignbuilder')
+def camp_builder():
+    return render_template('mockup/campaign-builder.html')

@@ -15,6 +15,9 @@ from datetime import datetime
 # controllers
 #----------------------------------------
 
+FACEBOOK_APP_ID = '1433546090279923'
+FACEBOOK_APP_SECRET = '213906f6f84c79d8bce08686270c15f0'
+app.config["SECRET_KEY"] = '213906f6f84c79d8bce08686270c15f0'
 oauth = OAuth()
 
 facebook = oauth.remote_app('facebook',
@@ -67,7 +70,7 @@ def facebook_authorized(resp):
         print user_id
         print user_name
 
-    return redirect('/static/campaign')
+    return redirect('/static/campaigns')
 
 @app.route("/logout")
 def logout():

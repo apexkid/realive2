@@ -66,6 +66,11 @@ class Campaign(FlaskView):
 
         if 'priorities' in keys:
             campaign.priorities = data['priorities']
+
+        if 'move_in_date' in keys:
+            campaign.move_in_date = data['move_in_date']
+        if 'end_date' in keys:
+            campaign.end_date = data['end_date']
         campaign.added_on = datetime.now()
         campaign.user = km.User.objects.get(user_id=session['user_id'])
         try:
