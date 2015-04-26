@@ -63,6 +63,7 @@ class Campaign(FlaskView):
                 campaign.livingCost = int(data['livingCost'])
             except Exception,e :
                 return Response(json.dumps({'details':'Exception: %s'%repr(e)}), status=403, content_type="application/json")
+
         if 'priorities' in keys:
             campaign.priorities = data['priorities']
         campaign.added_on = datetime.now()

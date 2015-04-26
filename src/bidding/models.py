@@ -53,7 +53,7 @@ class Campaign(db.Document):
 
     def to_json(self):
         return {
-            'user': self.user.id,
+            'user': self.user,
             'id': self.id,
             'city': self.city,
             'officeLocation': self.officeLocation,
