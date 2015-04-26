@@ -48,6 +48,8 @@ def create_app(package_name='bidding'):
     app.register_blueprint(comment_blueprint)
     from views import fb_blueprint
     app.register_blueprint(fb_blueprint)
+    from views import static_blueprint
+    app.register_blueprint(static_blueprint)
 
 
     from . import models

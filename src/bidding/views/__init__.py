@@ -9,6 +9,9 @@ comment_blueprint = Blueprint('comment_blueprint', __name__)
 
 fb_blueprint = Blueprint('fb_blueprint', __name__)
 
+static_blueprint = Blueprint('static_blueprint', __name__)
+
 from . import api
 from . import comment_api
 from . import facebook_integ
+from . import static_view
