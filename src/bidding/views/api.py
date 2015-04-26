@@ -73,11 +73,13 @@ class Campaign(FlaskView):
             campaign.end_date = data['end_date']
         campaign.added_on = datetime.now()
         campaign.user = km.User.objects.get(user_id=session['user_id'])
+        print json.dumps(campaign.to_json(), default=json_util.default)
         try:
             campaign.save()
             return Response(json.dumps(campaign.to_json(), default=json_util.default), status=200, content_type="application/json")
         except Exception,e :
-            return Response(json.dumps({'details':'Exception: %s'%repr(e)}), status=403, content_type="application/json")
+            #print repr(e)
+            return Response(json.dumps({'details':'Exception: %s'%repr(e)}), status=404, content_type="application/json")
 
 
 

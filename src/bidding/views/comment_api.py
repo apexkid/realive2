@@ -3,10 +3,12 @@
 from . import api_blueprint as app
 from flask.ext.classy import FlaskView
 from bidding import models as km
-from flask import Response, request
+from flask import Response, request, session
 from bson import json_util
 import json
 from datetime import datetime
+
+
 
 class CommentAPI(FlaskView):
     def get(self, comment_id):
@@ -25,16 +27,15 @@ class CommentAPI(FlaskView):
         if 'campaign_id' in keys:
             campaign = km.Campaign.objects.get(id=data['campaign_id'])
             comment.campaign_id = campaign
-        if 'user' in keys:
-            user = km.User.objects.get(id=data['user'])
-            comment.user = user
         if 'content' in keys:
             comment.content = data['content']
-        if 'longitude' in keys:
-            comment.longitude = data['longitude']
-        if 'latitude' in keys:
-            comment.latitude = data['latitude']
+        if 'cod1' in keys:
+            comment.cod1 = data['cod1']
+        if 'cod2' in keys:
+            comment.cod2 = data['cod2']
 
+        user = km.User.objects.get(user_id=session['user_id'])
+        comment.user = user
         comment.added_on = datetime.now()
         try:
             comment.save()

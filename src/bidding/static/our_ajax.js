@@ -3,7 +3,7 @@
 var root = 'http://localhost:5000';
 	function getAllCampaign() {
 		$.ajax({
-  			url: root + '/campaign',
+  			url: root + '/campaign/',
   			method: 'GET',
   			dataType: "json",
   			success: function(data) {
@@ -12,14 +12,31 @@ var root = 'http://localhost:5000';
 		});
 	};
 
-	function addCampaign() {
+	function getOneCampaign(id) {
+	    $.ajax({
+  			url: root + '/campaign/' + id,
+  			method: 'GET',
+  			dataType: "json",
+  			success: function(data) {
+  				console.log(data);
+  			}
+		});
+	};
+
+	function addCampaign(ntitle, ncity, nofficeLocation, nlocalityPref, npoi, nlivingCost, npriorities, nmove_in_date, nend_date) {
 		$.ajax({
-			url: root + '/posts',
+			url: root + '/campaign/',
   			method: 'POST',
   			data: {
-			    title: 'foo',
-			    body: 'bar',
-			    userId: 1
+			    title: ntitle,
+			    city: ncity,
+			    officeLocation: nofficeLocation,
+			    localityPref: nlocalityPref,
+			    poi: npoi,
+			    livingCost: nlivingCost,
+			    priorities: npriorities,
+			    move_in_date: nmove_in_date,
+			    end_date: nend_date
 			},
 			success: function(data) {
   				console.log(data);
@@ -38,14 +55,15 @@ var root = 'http://localhost:5000';
 		});
 	}
 
-	function addResponse(id) {
+	function addResponse(ncampaign_id, ncomment, ncod1, ncod2) {
 		$.ajax({
 			url: root + '/campaign/' + id + '/comment',
   			method: 'POST',
   			data: {
-			    title: 'foo',
-			    body: 'bar',
-			    userId: 1
+			    campaign_id: ncampaign_id,
+			    content: ncomment,
+			    cod1: ncod1,
+			    cod2: ncod2
 			},
 			success: function(data) {
   				console.log(data);

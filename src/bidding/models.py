@@ -55,7 +55,7 @@ class Campaign(db.Document):
 
     def to_json(self):
         return {
-            'user': self.user,
+            'user': self.user.id,
             'id': self.id,
             'city': self.city,
             'officeLocation': self.officeLocation,
@@ -83,8 +83,8 @@ class Comment(db.Document):
     campaign_id = db.ReferenceField(Campaign)
     user = db.ReferenceField(User)
     content = db.StringField(max_length=500)
-    longitude = db.StringField(max_length=20)
-    latitude = db.StringField(max_length=20)
+    cod1 = db.StringField(max_length=50)
+    cod2 = db.StringField(max_length=50)
     is_active = db.BooleanField(default=True)
     is_deleted = db.BooleanField(default=False)
     added_on = db.DateTimeField()
