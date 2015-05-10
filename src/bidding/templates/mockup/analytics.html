@@ -1,0 +1,343 @@
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Realive : House hunt simplified</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="#">Realive</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#about">Logout</a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+<div class="container">
+    <div class="row">
+        <div class="span8">
+            <div id="map-canvas"></div>
+        </div> </div>
+        
+        <div class="span4">
+            <h2>Campaign Results</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="    alert-success" style="display:none;">
+                <span class="glyphicon glyphicon-list"></span> Re-order rows by dragging </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Distance from
+                        </th>
+                        <th>
+                            Distance
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            Kempgowda Airport
+                        </td>
+                        <td id = "airport">
+                            0
+                        </td>
+                       
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Bangalore City Railway Station
+                        </td>
+                        <td id = "sbc">
+                            0
+                        </td>
+                       
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Yashwantpur Railway Station
+                        </td>
+                        <td id = "ypr">
+                            0
+                        </td>
+                     
+                    </tr>
+
+                        <tr>
+                        <td>
+                            M.G. Road
+                        </td>
+                        <td id="mg">
+                            0
+                        </td>
+                     
+                    </tr>
+                   <tr>
+                        <td>
+                            Indira Nagar
+                        </td>
+                        <td id ="ingr">
+                            0
+                        </td>
+                     
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+        </div>
+    </div>
+</div>  
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="https://github.com/raun/Realive"> <i class="fa fa-github fa-fw"></i> Source Code </a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+
+                    </ul>
+                    <p class="copyright text-muted small">Copyright &copy; Realive 2015. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    
+
+    
+<script type="text/javascript">
+
+$( document ).ready(function() {
+var dataset = [{lat: 12.9100, lng: 77.6400},
+{lat: 12.9259, lng: 77.6229},
+{lat: 12.9608, lng: 77.6361},
+{lat: 12.9700, lng: 77.7500}];
+
+var optimum = calcSuggestedLocation(dataset);
+
+var airport  = distFromAirport(optimum[0], optimum[1]);
+var sbc = distFromSbc(optimum[0], optimum[1]);
+var ypr = distFromYpr(optimum[0], optimum[1]);
+var mg = distFromMG(optimum[0], optimum[1]);
+var ingr = distFromIngr(optimum[0], optimum[1]);
+
+
+
+$("#airport").html(airport+" km");
+$("#sbc").html(sbc+" km");
+$("#ypr").html(ypr+" km");
+$("#mg").html(mg+" km");
+$("#ingr").html(ingr+" km");
+
+
+});
+ function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+ 
+function dist(a, b, c, d) {
+    var from = new google.maps.LatLng(a, b);
+        var to   = new google.maps.LatLng(c, d);
+        var dist = google.maps.geometry.spherical.computeDistanceBetween(from, to);
+    return round(dist/1000, 1);
+}
+ 
+function distFromAirport(a, b) {
+        return dist(a, b, 13.2069, 77.7042);
+}
+ 
+function distFromYpr(a, b) {
+        return dist(a, b, 13.0285, 77.5462);
+}
+ 
+function distFromSbc(a, b) {
+        return dist(a, b, 12.9783, 77.5694);
+}
+
+function distFromMG(a, b) {
+        return dist(a, b, 12.9738, 77.6119);
+}
+
+function distFromIngr(a, b) {
+        return dist(a, b, 12.9783, 77.5694);
+} 
+ 
+var circle;
+ 
+function calcSuggestedLocation(data) {
+  var lat = []; var lng = [];
+  data.forEach(function(coordinate){
+    lat.push(coordinate.lat);
+    lng.push(coordinate.lng);
+    });
+ 
+
+    var optLat = 0, optLng = 0;
+    for (var i = 0; i < lat.length; i++) {
+      optLat += lat[i];
+      optLng += lng[i];
+    }
+    optLat /= lat.length;
+    optLng /= lat.length;
+
+
+   
+    drawCircle(optLat, optLng, 3000);
+    return [optLat,optLng];
+}
+ 
+function drawCircle(lat, lon, rad) {
+  // Create the map.
+  var mapOptions = {
+    zoom: 13,
+    center: new google.maps.LatLng(lat, lon),
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  };
+ 
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+ 
+  var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(lat, lon),
+    title: 'new marker',
+    draggable: false,
+    map: map
+  });
+ 
+  // Construct the circle for each value in citymap.
+  // Note: We scale the area of the circle based on the population.
+    var populationOptions = {
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.65,
+      strokeWeight: 2,
+      fillColor: '#FF0000',
+      fillOpacity: 0.1,
+      map: map,
+      center: new google.maps.LatLng(lat, lon),
+      radius: rad
+    };
+    // Add the circle for this city to the map.
+    circle = new google.maps.Circle(populationOptions);
+}
+
+</script>
+
+<script type="text/javascript">
+(function ($) {
+    $.fn.extend({
+        tableAddCounter: function (options) {
+
+            // set up default options 
+            var defaults = {
+                title: '#',
+                start: 1,
+                id: false,
+                cssClass: false
+            };
+
+            // Overwrite default options with user provided
+            var options = $.extend({}, defaults, options);
+
+            return $(this).each(function () {
+                // Make sure this is a table tag
+                if ($(this).is('table')) {
+
+                    // Add column title unless set to 'false'
+                    if (!options.title) options.title = '';
+                    $('th:first-child, thead td:first-child', this).each(function () {
+                        var tagName = $(this).prop('tagName');
+                        $(this).before('<' + tagName + ' rowspan="' + $('thead tr').length + '" class="' + options.cssClass + '" id="' + options.id + '">' + options.title + '</' + tagName + '>');
+                    });
+
+                    // Add counter starting counter from 'start'
+                    $('tbody td:first-child', this).each(function (i) {
+                        $(this).before('<td>' + (options.start + i) + '</td>');
+                    });
+
+                }
+            });
+        }
+    });
+})(jQuery);
+
+$(document).ready(function () {
+    $('.table').tableAddCounter();
+    $.getScript("http://code.jquery.com/ui/1.9.2/jquery-ui.js").done(function (script, textStatus) { $('tbody').sortable();$(".alert-info").alert('close');$(".alert-success").show(); });
+});
+    </script>
+
+</body>
+
+</html>
